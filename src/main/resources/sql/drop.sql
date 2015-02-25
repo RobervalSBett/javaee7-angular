@@ -1,2 +1,6 @@
 DROP TABLE PERSON
 DROP SEQUENCE ID
+
+DROP SEQUENCE Bairro
+drop index BAIRROS_PK;
+drop table Bairros;
