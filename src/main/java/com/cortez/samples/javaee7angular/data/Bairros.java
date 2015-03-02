@@ -16,7 +16,7 @@ public class Bairros {
     @Column(name = "IDBAI")
     private Long id;
     
-    @Column(name = "DESCRIBAI", length = 254)
+    @Column(name = "DESCRIBAI", length = 60)
     private String descricao;
 
     public Long getId() {
