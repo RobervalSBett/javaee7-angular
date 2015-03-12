@@ -5,15 +5,9 @@ DROP SEQUENCE Bairros
 drop index BAIRROS_PK;
 drop table Bairros;
 
-DROP SEQUENCE AUDITORES;
-drop index AUDITORES_PK;
-drop table Auditores;
-
-DROP SEQUENCE AUDITORIAS;
-drop index ASSOCIATION_8_FK;
-drop index ASSOCCERTAUDITORIA_FK;
-drop index AUDITORIAS_PK;
-drop table Auditorias;
+DROP SEQUENCE CIDADES;
+drop index CIDADES_PK;
+drop table Cidades;
 
 DROP SEQUENCE CEPS;
 drop index ASSOCCEPSCID_FK;
@@ -21,21 +15,9 @@ drop index ASSOCCEPBAI_FK;
 drop index CEPS_PK;
 drop table Ceps;
 
-DROP SEQUENCE CERTIFICADORAS;
-drop index ASSOCIATION_3_FK;
-drop index CERTIFICADORAS_PK;
-drop table Certificadoras;
-
-DROP SEQUENCE CHECKLIST;
-drop index ASSOCCOLACHKLST_FK;
-drop index ASSOCEQUICHKLIST_FK;
-drop index ASSOCAUDITORIACHKLIST_FK;
-drop index CHECKLIST_PK;
-drop table CheckList;
-
-DROP SEQUENCE CIDADES;
-drop index CIDADES_PK;
-drop table Cidades;
+DROP SEQUENCE AUDITORES;
+drop index AUDITORES_PK;
+drop table Auditores;
 
 DROP SEQUENCE CLIENTES;
 drop index CLIENTES_PK;
@@ -45,11 +27,30 @@ DROP SEQUENCE COLABORADORES;
 drop index COLABORADORES_PK;
 drop table Colaboradores;
 
+DROP SEQUENCE CERTIFICADORAS;
+drop index ASSOCIATION_3_FK;
+drop index CERTIFICADORAS_PK;
+drop table Certificadoras;
+
+
+DROP SEQUENCE AUDITORIAS;
+drop index ASSOCIATION_8_FK;
+drop index ASSOCCERTAUDITORIA_FK;
+drop index AUDITORIAS_PK;
+drop table Auditorias;
+
 DROP SEQUENCE EQUIPEAUDITORES;
 drop index ASSOCAUDITEQUIPE_FK;
 drop index ASSOCAUDITORIAEQUIPE_FK;
 drop index EQUIPEAUDITORES_PK;
 drop table EQUIPEAUDITORES;
+
+DROP SEQUENCE CHECKLIST;
+drop index ASSOCCOLACHKLST_FK;
+drop index ASSOCEQUICHKLIST_FK;
+drop index ASSOCAUDITORIACHKLIST_FK;
+drop index CHECKLIST_PK;
+drop table CheckList;
 
 DROP SEQUENCE NAOCONFORMIDADES;
 drop index ASSOCCOLANC_FK;
