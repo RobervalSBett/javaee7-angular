@@ -4,7 +4,7 @@ CREATE TABLE PERSON("ID" INTEGER not null primary key, "NAME" VARCHAR(50), "DESC
 CREATE SEQUENCE UF;
 CREATE DOMAIN UF AS VARCHAR(2) 
 DEFAULT 'SC' NOT NULL
-CHECK (VALUE IN('MG','SP','RJ','AC','AL','AP','AM','BA','CE','DF','ES','GO', 'MA','MS','MT','PA','PB','PE','PI','PR','RN','RO','RR','RS', 'SC','SE','TO' );
+CHECK (VALUE IN('MG','SP','RJ','AC','AL','AP','AM','BA','CE','DF','ES','GO', 'MA','MS','MT','PA','PB','PE','PI','PR','RN','RO','RR','RS', 'SC','SE','TO' ));
 
 /*==============================================================*/
 CREATE SEQUENCE Bairros START WITH 1
