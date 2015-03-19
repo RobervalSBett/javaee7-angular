@@ -23,7 +23,7 @@ constraint PK_CIDADES primary key (IDCID));
 create unique index CIDADES_PK on Cidades (IDCID);
 
 /*==============================================================*/
-CREATE SEQUENCE CEPS START WITH 1
+CREATE SEQUENCE CEPS 
 create table Ceps ("CEP"       VARCHAR(8)   not null,
                    "IDCID"     INT4         not null,
                    "IDBAI"     INT4         not null,

@@ -15,7 +15,7 @@ public class Cidades
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "IDCID")
     @SequenceGenerator(name = "IDCID", sequenceName = "CIDADES")
-    @Column(name = "IDCID")
+    @Column(name = "idcid")
     private Long id;
     
     @Column(name = "DESCRICID", length = 60)
@@ -31,7 +31,7 @@ public class Cidades
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(final Long id) {
         this.id = id;
     }
 
@@ -39,7 +39,7 @@ public class Cidades
         return nomeCid;
     }
 
-    public void setNomeCid(String nomeCid) {
+    public void setNomeCid(final String nomeCid) {
         this.nomeCid = nomeCid;
     }
 
@@ -47,7 +47,7 @@ public class Cidades
         return siglaUf;
     }
 
-    public void setSiglaUf(String siglaUf) {
+    public void setSiglaUf(final String siglaUf) {
         this.siglaUf = siglaUf;
     }
 
@@ -55,7 +55,7 @@ public class Cidades
         return statusCid;
     }
 
-    public void setStatusCid(String statusCid) {
+    public void setStatusCid(final String statusCid) {
         this.statusCid = statusCid;
     }
     
