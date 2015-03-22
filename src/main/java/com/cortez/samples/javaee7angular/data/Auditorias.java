@@ -28,16 +28,16 @@ public class Auditorias
     @Column(name = "DESCRIOBJAUDIT", length =254 )
     private String descriObjAudit;  
      
-    @Column(name = "DTHRCADAUDIT", length =10 )
+    @Column(name = "DTHRCADAUDIT", length =19 )
     private String dtHrCadAudit ;  
     
-    @Column(name = "DTHRINIAUDIT", length =10 )
+    @Column(name = "DTHRINIAUDIT", length =19 )
     private String dtHrIniAudit;  
     
-    @Column(name = "DTHRREALIAUDIT", length =10 )
+    @Column(name = "DTHRREALIAUDIT", length =19 )
     private String dtHrRealiaudit;  
     
-    @Column(name = "DTATUALIZA", length =10 )
+    @Column(name = "DTATUALIZA", length =19 )
     private String dtAtualiza;  
 
     @Column(name = "OBSAUDIT", length =100 )
