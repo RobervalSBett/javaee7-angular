@@ -36,7 +36,16 @@ public class Auditores
     private String compleEndAudit;
         
     @Column(name = "OBSAUDIT", length = 100)
-    private String obsAudit;  
+    private String obsAudit; 
+    
+    @Column(name = "STATUSAUDITORES", length = 1)
+    private String statusAuditores; 
+    
+    @Column(name = "SENHAUDIT", length = 8)
+    private String senhAudit;    
+    
+    @Column(name = "USUAUDIT", length = 10)
+    private String usuAudit;
 
     public Long getId() {
         return id;
@@ -100,5 +109,32 @@ public class Auditores
 
     public void setObsAudit(final String obsAudit) {
         this.obsAudit = obsAudit;
-    }   
+    }  
+
+    public String getStatusAuditores() {
+        return statusAuditores;
+    }
+
+    public void setStatusAuditores(final String statusAuditores) {
+        this.statusAuditores = statusAuditores;
+    }
+
+    public String getSenhAudit() {
+        return senhAudit;
+    }
+
+    public void setSenhAudit(final String senhAudit) {
+        this.senhAudit = senhAudit;
+    }
+
+    public String getUsuAudit() {
+        return usuAudit;
+    }
+
+    public void setUsuAudit(final String usuAudit) {
+        this.usuAudit = usuAudit;
+    }
+      
+    
+    
 }

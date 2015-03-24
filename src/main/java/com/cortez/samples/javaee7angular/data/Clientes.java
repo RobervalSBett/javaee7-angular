@@ -45,6 +45,9 @@ public class Clientes
     @Column(name = "CONTATOCLI", length = 60)
     private String contatoCli;  
 
+    @Column(name = "EMAILCONTATO", length = 100)
+    private String emailContato;         
+
     @Column(name = "CNPJCLI", length = 14)
     private String cnpjCli;  
     
@@ -170,4 +173,15 @@ public class Clientes
         this.statusCli = statusCli;
     }
 
+    public String getEmailContato() {
+        return emailContato;
+    }
+
+    public void setEmailContato(final String emailContato) {
+        this.emailContato = emailContato;
+    }
+
+    
+    
+    
 }

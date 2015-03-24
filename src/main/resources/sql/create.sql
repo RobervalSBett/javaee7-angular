@@ -54,6 +54,8 @@ create table Auditores ("IDAUDITOR" INT4          not null,
                         "TIPOAUDIT"  VARCHAR(1)   null,
                         "COMPLEENDAUDIT" VARCHAR(60) null,
                         "OBSAUDIT" VARCHAR(100) null,
+                        "USUAUDIT" VARCHAR(10) null,
+                        "SENHAUDIT" VARCHAR(8) null,
                         "STATUSAUDITORES" VARCHAR(1)
                         constraint PK_AUDITORES primary key (IDAUDITOR));
 create unique index AUDITORES_PK on Auditores (IDAUDITOR);
@@ -74,6 +76,7 @@ create table Clientes ("IDCLI"        int4         not null,
                        "EMAILCLI"     VARCHAR(100) null,
                        "SITECLI"      VARCHAR(100) null,
                        "CONTATOCLI"   VARCHAR(60)  null,
+                       "EMAILCONTATO" VARCHAR(100) null,
                        "CNPJCLI"      VARCHAR(14)  null,
                        "INSCRICLI"    VARCHAR(14)  null,
                        "OBSCLI"       VARCHAR(100) null,
