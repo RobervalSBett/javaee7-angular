@@ -18,6 +18,9 @@ public class Bairros {
     
     @Column(name = "DESCRIBAI", length = 60)
     private String descricao;
+    
+    @Column(name = "STATUSBAI", length = 1)
+    private String statusBai; 
 
     public Long getId() {
         return id;
@@ -33,5 +36,15 @@ public class Bairros {
 
     public void setDescricao(final String descricao) {
         this.descricao = descricao;
-    }   
+    }
+
+    public String getStatusBai() {
+        return statusBai;
+    }
+
+    public void setStatusBai(final String statusBai) {
+        this.statusBai = statusBai;
+    }
+    
+    
 }

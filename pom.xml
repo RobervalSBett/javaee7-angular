@@ -24,6 +24,8 @@
         <version.plugin.jgitflow>1.0-m3</version.plugin.jgitflow>
         <version.plugin.jrebel>1.1.5</version.plugin.jrebel>
 
+        <version.hibernate>4.3.1.Final</version.hibernate>
+        <version.postgresql>9.4-1200-jdbc41</version.postgresql>
         <!-- Dependencies -->
         <version.dependency.javaee>7.0</version.dependency.javaee>
     </properties>
@@ -42,7 +44,7 @@
                 </configuration>
             </plugin>
 
-<!--            <plugin>
+            <!--            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
                 <version>${version.plugin.enforcer}</version>
@@ -105,5 +107,15 @@
             <version>${version.dependency.javaee}</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>${version.hibernate}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>${version.postgresql}</version>
+        </dependency>        
     </dependencies>
 </project>

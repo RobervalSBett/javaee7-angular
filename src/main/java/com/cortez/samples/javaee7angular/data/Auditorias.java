@@ -17,10 +17,10 @@ public class Auditorias
     private Long id;   
     
     @Column(name = "IDCERT" )
-    private int idCert ;    
+    private Certificadoras certificadora ;    
     
     @Column(name = "IDCLI" )
-    private int idCli ;  
+    private Clientes cliente ;  
     
     @Column(name = "DESCRIAUDIT", length =254 )
     private String descriAudit;  
@@ -56,23 +56,23 @@ public class Auditorias
         this.id = id;
     }
 
-    public int getIdCert() 
+    public Certificadoras getCertificadora() 
     {
-        return idCert;
+        return certificadora;
     }
 
-    public void setIdCert(final int idCert) 
+    public void setCerticadora(final Certificadoras certificadora) 
     {
-        this.idCert = idCert;
+        this.certificadora = certificadora;
     }
 
-    public int getIdCli() {
-        return idCli;
+    public Clientes getCliente() {
+        return cliente;
     }
 
-    public void setIdCli(final int idCli) 
+    public void setCliente(final Clientes cliente) 
     {
-        this.idCli = idCli;
+        this.cliente = cliente;
     }
 
     public String getDescriAudit() 
@@ -154,5 +154,11 @@ public class Auditorias
     {
         this.statusNc = statusNc;
     }
+    
+    
+    
+    
+    
+    
         
 }

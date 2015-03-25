@@ -13,7 +13,7 @@ import java.util.List;
  * @author Roberto Cortez
  */
 @XmlRootElement
-public class PaginatedListWrapper implements Serializable {
+public class PaginatedListWrapper<T> implements Serializable {
     private Integer currentPage;
     private Integer pageSize;
     private Integer totalResults;
@@ -21,7 +21,7 @@ public class PaginatedListWrapper implements Serializable {
     private String sortFields;
     private String sortDirections;
     @XmlElement
-    private List<Person> list;
+    private List<T> list;
 
     public Integer getCurrentPage() {
         return currentPage;
@@ -67,7 +67,7 @@ public class PaginatedListWrapper implements Serializable {
         return list;
     }
 
-    public void setList(List<Person> list) {
+    public void setList(List<T> list) {
         this.list = list;
     }
 }
