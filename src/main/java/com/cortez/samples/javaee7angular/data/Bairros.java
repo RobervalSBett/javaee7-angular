@@ -47,5 +47,4 @@ public class Bairros {
         this.statusBai = statusBai;
     }
     
-    
 }

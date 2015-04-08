@@ -10,6 +10,7 @@ import javax.persistence.SequenceGenerator;
 
 public class Auditorias 
 {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "IDAUDIT")
     @SequenceGenerator(name = "IDAUDIT", sequenceName = "AUDITORIAS")
