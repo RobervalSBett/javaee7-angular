@@ -8,14 +8,14 @@ CHECK (VALUE IN('MG','SP','RJ','AC','AL','AP','AM','BA','CE','DF','ES','GO', 'MA
 
 /*==============================================================*/
 CREATE SEQUENCE Bairros START WITH 1
-create table Bairros ("IDBAI"     INTEGER not null, 
+create table Bairros ("IDBAI"     INT4 not null, 
                       "DESCRIBAI" VARCHAR(60) null, 
                       "STATUSBAI" VARCHAR(1) null,
 constraint PK_BAIRROS primary key (IDBAI))
 create unique index BAIRROS_PK on Bairros ("IDBAI");
 /*==============================================================*/
 CREATE SEQUENCE CIDADES START WITH 1
-create table Cidades ("IDCID"      INTEGER  not null,
+create table Cidades ("IDCID"      INT4  not null,
                       "DESCRICID"  VARCHAR(60) null,
                       "UFCID"      UF  null,
                       "STATUSCID"  VARCHAR(1) Nnull,
