@@ -50,19 +50,11 @@ public class ApiResource extends Application
        return new ColaboradorResource(); 
     } 
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    @Path("auditores")
+    public AuditorResource auditorResource()
+    {
+       return new AuditorResource(); 
+    } 
     
     
     

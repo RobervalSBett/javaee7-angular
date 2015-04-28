@@ -15,6 +15,10 @@ public class Auditores
     @SequenceGenerator(name = "IDAUDITOR", sequenceName = "AUDITORES")
     @Column(name = "IDAUDITORES")
     private Long id;
+
+ 
+    @Column(name = "CEP", length = 8)
+    private String cepAudit;    
     
     @Column(name = "NOMEAUDIT", length = 60)
     private String nomeAudit;
@@ -34,6 +38,10 @@ public class Auditores
     
     @Column(name = "COMPLEENDAUDIT", length = 60)
     private String compleEndAudit;
+    
+    @Column(name = "TIPOAUDIT", length = 1)
+    private String tipoAudit;    
+    
         
     @Column(name = "OBSAUDIT", length = 100)
     private String obsAudit; 
@@ -47,6 +55,14 @@ public class Auditores
     @Column(name = "USUAUDIT", length = 10)
     private String usuAudit;
 
+    public String getTipoAudit() {
+        return tipoAudit;
+    }
+
+    public void setTipoAudit(final String tipoAudit) {
+        this.tipoAudit = tipoAudit;
+    }
+    
     public Long getId() {
         return id;
     }
@@ -54,6 +70,15 @@ public class Auditores
     public void setId(final Long id) {
         this.id = id;
     }
+    
+        public String getCepAudit() {
+        return cepAudit;
+    }
+
+    public void setCepAudit(final String cepAudit) {
+        this.cepAudit = cepAudit;
+    }
+    
 
     public String getNomeAudit() {
         return nomeAudit;
