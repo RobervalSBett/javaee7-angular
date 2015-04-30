@@ -56,4 +56,10 @@ public class ApiResource extends Application
        return new AuditorResource(); 
     } 
 
+    @Path("clientes")
+    public ClienteResource clienteResource()
+    {
+       return new ClienteResource(); 
+    }    
+    
 }
