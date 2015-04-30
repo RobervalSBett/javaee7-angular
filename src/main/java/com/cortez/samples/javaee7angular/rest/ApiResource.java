@@ -31,7 +31,7 @@ public class ApiResource extends Application
     {
        return new CidadeResource(); 
     }
-    
+        
     @Path("bairros")
     public BairroResource bairroResource()
     {
@@ -55,8 +55,5 @@ public class ApiResource extends Application
     {
        return new AuditorResource(); 
     } 
-    
-    
-    
-    
+
 }
