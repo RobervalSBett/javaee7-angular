@@ -62,4 +62,41 @@ public class ApiResource extends Application
        return new ClienteResource(); 
     }    
     
+    @Path("certificadoras")
+    public CertificadoraResource certificadoraResource()
+    {
+       return new CertificadoraResource(); 
+    }  
+    
+    @Path("auditorias")
+    public AuditoriaResource auditoriaResource()
+    {
+       return new AuditoriaResource(); 
+    } 
+    
+    @Path("equipeauditores")
+    public EquipeAuditorResource equipeAuditorResource()
+    {
+       return new EquipeAuditorResource(); 
+    }     
+
+    @Path("checklist")
+    public CheckListResource checkListResource()
+    {
+       return new CheckListResource(); 
+    } 
+    
+    @Path("ocorrencias")
+    public OcorrenciaResource ocorrenciaResource()
+    {
+       return new OcorrenciaResource(); 
+    }     
+    
+    @Path("naoconformidades")
+    public NaoConformidadeResource naoConformidadeResource()
+    {
+       return new NaoConformidadeResource(); 
+    }    
+    
+    
 }
