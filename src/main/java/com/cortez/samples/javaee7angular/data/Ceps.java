@@ -11,11 +11,14 @@ import javax.persistence.SequenceGenerator;
 public class Ceps 
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CEP")
-    @SequenceGenerator(name = "CEP", sequenceName = "CEPS")
-    @Column(name = "CEP")
-    private String cep; 
-       
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "IDCEP")
+    @SequenceGenerator(name = "IDCEP", sequenceName = "CEPS")
+    @Column(name = "IDCEP")
+    private Long id;     
+    
+    @Column(name = "CEP",length = 8)
+    private String cep;
+     
     @Column(name = "IDCID")
     private int idCid;
   
@@ -30,6 +33,14 @@ public class Ceps
        
     @Column(name = "STATUSCEP", length = 1)
     private String statusCep;  
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(final Long id) {
+        this.id = id;
+    }    
 
     public String getCep() {
         return cep;
