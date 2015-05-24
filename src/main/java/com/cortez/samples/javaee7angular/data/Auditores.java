@@ -14,11 +14,11 @@ public class Auditores
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "IDAUDITOR")
     @SequenceGenerator(name = "IDAUDITOR", sequenceName = "AUDITORES")
-    @Column(name = "IDAUDITORES")
+    @Column(name = "IDAUDITOR")
     private Long id;
 
  
-    @Column(name = "CEP", length = 8)
+    @Column(name = "IDCEP", length = 8)
     private String cepAudit;    
     
     @Column(name = "NOMEAUDIT", length = 60)

@@ -23,9 +23,13 @@ import javax.ws.rs.core.MediaType;
 @Stateless
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-public class AuditorResource 
-{
-  private EntityManager entityManager = Persistence.createEntityManagerFactory("localPU").createEntityManager();
+public class AuditorResource {
+
+    private EntityManager entityManager;
+
+    public AuditorResource() {
+        entityManager = Persistence.createEntityManagerFactory("localPU").createEntityManager();
+    }
 
     private Integer countAuditores() {
         Query query = entityManager.createQuery("SELECT COUNT(au.id) FROM Auditores au");
@@ -34,8 +38,8 @@ public class AuditorResource
 
     @SuppressWarnings("unchecked")
     private List<Auditores> findAuditores(int startPosition, int maxResults, String sortFields, String sortDirections) {
-        Query query =
-                entityManager.createQuery("SELECT au FROM AUDITORES au ORDER BY au." + sortFields + " " + sortDirections);
+        Query query
+                = entityManager.createQuery("SELECT au FROM Auditores au ORDER BY au." + sortFields + " " + sortDirections);
         query.setFirstResult(startPosition);
         query.setMaxResults(maxResults);
         return query.getResultList();
@@ -45,23 +49,20 @@ public class AuditorResource
         wrapper.setTotalResults(countAuditores());
         int start = (wrapper.getCurrentPage() - 1) * wrapper.getPageSize();
         wrapper.setList(findAuditores(start,
-                                    wrapper.getPageSize(),
-                                    wrapper.getSortFields(),
-                                    wrapper.getSortDirections()));
+                wrapper.getPageSize(),
+                wrapper.getSortFields(),
+                wrapper.getSortDirections()));
         return wrapper;
     }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public PaginatedListWrapper listAuditores(@DefaultValue("1")
-                                            @QueryParam("page")
-                                            Integer page,
-                                            @DefaultValue("id")
-                                            @QueryParam("sortFields")
-                                            String sortFields,
-                                            @DefaultValue("asc")
-                                            @QueryParam("sortDirections")
-                                            String sortDirections) {
+            @QueryParam("page") Integer page,
+            @DefaultValue("id")
+            @QueryParam("sortFields") String sortFields,
+            @DefaultValue("asc")
+            @QueryParam("sortDirections") String sortDirections) {
         PaginatedListWrapper paginatedListWrapper = new PaginatedListWrapper();
         paginatedListWrapper.setCurrentPage(page);
         paginatedListWrapper.setSortFields(sortFields);
@@ -79,7 +80,7 @@ public class AuditorResource
     @POST
     public Auditores saveAuditor(Auditores auditor) {
         if (auditor.getId() == null) {
-            Auditores auditorToSave = new Auditores();            
+            Auditores auditorToSave = new Auditores();
             auditorToSave.setCepAudit(auditor.getCepAudit());
             auditorToSave.setNomeAudit(auditor.getNomeAudit());
             auditorToSave.setCpfAudit(auditor.getCpfAudit());
@@ -116,7 +117,6 @@ public class AuditorResource
     @Path("{id}")
     public void deleteAuditor(@PathParam("id") Long id) {
         entityManager.remove(getAuditores(id));
-    }   
-      
-}
+    }
 
+}

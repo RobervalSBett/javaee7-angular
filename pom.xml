@@ -74,16 +74,16 @@
                 </configuration>
             </plugin>
 
-            <plugin>
+<!--            <plugin>
                 <groupId>external.atlassian.jgitflow</groupId>
                 <artifactId>jgitflow-maven-plugin</artifactId>
                 <version>${version.plugin.jgitflow}</version>
                 <configuration>
                     <noDeploy>true</noDeploy>
                 </configuration>
-            </plugin>
+            </plugin>-->
 
-            <plugin>
+<!--            <plugin>
                 <groupId>org.zeroturnaround</groupId>
                 <artifactId>jrebel-maven-plugin</artifactId>
                 <version>${version.plugin.jrebel}</version>
@@ -96,7 +96,7 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin>-->
         </plugins>
     </build>
 

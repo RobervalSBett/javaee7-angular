@@ -14,9 +14,13 @@ import javax.persistence.Persistence;
 @Stateless
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-public class CidadeResource  {
-    
-    private EntityManager entityManager = Persistence.createEntityManagerFactory("localPU").createEntityManager();
+public class CidadeResource {
+
+    private EntityManager entityManager;
+
+    public CidadeResource() {
+        entityManager = Persistence.createEntityManagerFactory("localPU").createEntityManager();
+    }
 
     private Integer countCidades() {
         Query query = entityManager.createQuery("SELECT COUNT(c.id) FROM Cidades c");
@@ -25,8 +29,8 @@ public class CidadeResource  {
 
     @SuppressWarnings("unchecked")
     private List<Cidades> findCidades(int startPosition, int maxResults, String sortFields, String sortDirections) {
-        Query query =
-                entityManager.createQuery("SELECT c FROM Cidades c ORDER BY c." + sortFields + " " + sortDirections);
+        Query query
+                = entityManager.createQuery("SELECT c FROM Cidades c ORDER BY c." + sortFields + " " + sortDirections);
         query.setFirstResult(startPosition);
         query.setMaxResults(maxResults);
         return query.getResultList();
@@ -36,23 +40,20 @@ public class CidadeResource  {
         wrapper.setTotalResults(countCidades());
         int start = (wrapper.getCurrentPage() - 1) * wrapper.getPageSize();
         wrapper.setList(findCidades(start,
-                                    wrapper.getPageSize(),
-                                    wrapper.getSortFields(),
-                                    wrapper.getSortDirections()));
+                wrapper.getPageSize(),
+                wrapper.getSortFields(),
+                wrapper.getSortDirections()));
         return wrapper;
     }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public PaginatedListWrapper listCidades(@DefaultValue("1")
-                                            @QueryParam("page")
-                                            Integer page,
-                                            @DefaultValue("id")
-                                            @QueryParam("sortFields")
-                                            String sortFields,
-                                            @DefaultValue("asc")
-                                            @QueryParam("sortDirections")
-                                            String sortDirections) {
+            @QueryParam("page") Integer page,
+            @DefaultValue("id")
+            @QueryParam("sortFields") String sortFields,
+            @DefaultValue("asc")
+            @QueryParam("sortDirections") String sortDirections) {
         PaginatedListWrapper paginatedListWrapper = new PaginatedListWrapper();
         paginatedListWrapper.setCurrentPage(page);
         paginatedListWrapper.setSortFields(sortFields);
