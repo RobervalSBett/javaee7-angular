@@ -14,7 +14,7 @@ public class Auditorias
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "IDAUDIT")
     @SequenceGenerator(name = "IDAUDIT", sequenceName = "AUDITORIAS")
-    @Column(name = "IDAUDIT")
+    @Column(name = "idaudit")
     private Long id;   
     
     @Column(name = "IDCERT" )
@@ -57,13 +57,11 @@ public class Auditorias
         this.id = id;
     }
 
-    public Certificadoras getCertificadora() 
-    {
+    public Certificadoras getCertificadora() {
         return certificadora;
     }
 
-    public void setCerticadora(final Certificadoras certificadora) 
-    {
+    public void setCertificadora(Certificadoras certificadora) {
         this.certificadora = certificadora;
     }
 
@@ -71,8 +69,7 @@ public class Auditorias
         return cliente;
     }
 
-    public void setCliente(final Clientes cliente) 
-    {
+    public void setCliente(Clientes cliente) {
         this.cliente = cliente;
     }
 

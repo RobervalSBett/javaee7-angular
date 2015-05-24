@@ -1,8 +1,6 @@
 package com.cortez.samples.javaee7angular.rest;
 
 import com.cortez.samples.javaee7angular.data.Auditores;
-import com.cortez.samples.javaee7angular.data.Bairros;
-import com.cortez.samples.javaee7angular.data.Cidades;
 import com.cortez.samples.javaee7angular.pagination.PaginatedListWrapper;
 import java.util.List;
 import javax.ejb.Stateless;

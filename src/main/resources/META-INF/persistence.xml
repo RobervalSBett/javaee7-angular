@@ -3,7 +3,7 @@
   <persistence-unit name="localPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     
-<!--    <class>com.cortez.samples.javaee7angular.data.Cidades</class>
+<!--<class>com.cortez.samples.javaee7angular.data.Cidades</class>
     <class>com.cortez.samples.javaee7angular.data.Bairros </class>
     <class>com.cortez.samples.javaee7angular.data.Ceps </class>
     <class>com.cortez.samples.javaee7angular.data.Certificadoras </class>    

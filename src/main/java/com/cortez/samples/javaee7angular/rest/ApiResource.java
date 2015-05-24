@@ -28,69 +28,69 @@ public class ApiResource extends Application {
         return new CidadeResource();
     }
 
-//    @Path("bairros")
-//    public BairroResource bairroResource()
-//    {
-//       return new BairroResource(); 
-//    } 
-//       
-//    @Path("ceps")
-//    public CepResource cepResource()
-//    {
-//       return new CepResource(); 
-//    } 
-//    
-//    @Path("colaboradores")
-//    public ColaboradorResource colaboradorResource()
-//    {
-//       return new ColaboradorResource(); 
-//    } 
-//    
+    @Path("bairros")
+    public BairroResource bairroResource()
+    {
+       return new BairroResource(); 
+    } 
+       
+    @Path("ceps")
+    public CepResource cepResource()
+    {
+       return new CepResource(); 
+    } 
+    
+    @Path("colaboradores")
+    public ColaboradorResource colaboradorResource()
+    {
+       return new ColaboradorResource(); 
+    } 
+    
     @Path("auditores")
     public AuditorResource auditorResource() {
         return new AuditorResource();
     }
 
-//    @Path("clientes")
-//    public ClienteResource clienteResource()
-//    {
-//       return new ClienteResource(); 
-//    }    
-//    
-//    @Path("certificadoras")
-//    public CertificadoraResource certificadoraResource()
-//    {
-//       return new CertificadoraResource(); 
-//    }  
-//    
-//    @Path("auditorias")
-//    public AuditoriaResource auditoriaResource()
-//    {
-//       return new AuditoriaResource(); 
-//    } 
-//    
-//    @Path("equipeauditores")
-//    public EquipeAuditorResource equipeAuditorResource()
-//    {
-//       return new EquipeAuditorResource(); 
-//    }     
-//
-//    @Path("checklist")
-//    public CheckListResource checkListResource()
-//    {
-//       return new CheckListResource(); 
-//    } 
-//    
-//    @Path("ocorrencias")
-//    public OcorrenciaResource ocorrenciaResource()
-//    {
-//       return new OcorrenciaResource(); 
-//    }     
-//    
-//    @Path("naoconformidades")
-//    public NaoConformidadeResource naoConformidadeResource()
-//    {
-//       return new NaoConformidadeResource(); 
-//    }    
-//    
+    @Path("clientes")
+    public ClienteResource clienteResource()
+    {
+       return new ClienteResource(); 
+    }    
+    
+    @Path("certificadoras")
+    public CertificadoraResource certificadoraResource()
+    {
+       return new CertificadoraResource(); 
+    }  
+    
+    @Path("auditorias")
+    public AuditoriaResource auditoriaResource()
+    {
+       return new AuditoriaResource(); 
+    } 
+    
+    @Path("equipeauditores")
+    public EquipeAuditorResource equipeAuditorResource()
+    {
+       return new EquipeAuditorResource(); 
+    }     
+
+    @Path("checklist")
+    public CheckListResource checkListResource()
+    {
+       return new CheckListResource(); 
+    } 
+    
+    @Path("ocorrencias")
+    public OcorrenciaResource ocorrenciaResource()
+    {
+       return new OcorrenciaResource(); 
+    }     
+    
+    @Path("naoconformidades")
+    public NaoConformidadeResource naoConformidadeResource()
+    {
+       return new NaoConformidadeResource(); 
+    }    
+    
 }
