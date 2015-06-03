@@ -1,4 +1,3 @@
-
 package com.cortez.samples.javaee7angular.data;
 
 import javax.persistence.Column;
@@ -8,24 +7,23 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 
-
 @Entity
-public class Cidades 
-{
+public class Cidades {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "IDCID")
-    @SequenceGenerator(name = "IDCID", sequenceName = "CIDADES")
+    @SequenceGenerator(name = "IDCID", sequenceName = "SEQ_CIDADES", allocationSize = 1)
     @Column(name = "idcid")
     private Long id;
-    
+
     @Column(name = "DESCRICID", length = 60)
     private String nomeCid;
-    
+
     @Column(name = "UFCID", length = 2)
     private String siglaUf;
-    
+
     @Column(name = "STATUSCID", length = 60)
-    private String statusCid ;     
+    private String statusCid;
 
     public Long getId() {
         return id;
@@ -58,5 +56,14 @@ public class Cidades
     public void setStatusCid(final String statusCid) {
         this.statusCid = statusCid;
     }
-    
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
 }

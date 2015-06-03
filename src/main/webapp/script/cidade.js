@@ -1,20 +1,20 @@
-var app = angular.module('persons', ['ngResource', 'ngGrid', 'ui.bootstrap']);
+var app = angular.module('cidades', ['ngResource', 'ngGrid', 'ui.bootstrap']);
 
 // Create a controller with name personsListController to bind to the grid section.
-app.controller('personsListController', function ($scope, $rootScope, personService) {
+app.controller('cidadesListController', function ($scope, $rootScope, cidadeService) {
     // Initialize required information: sorting, the first page to show and the grid options.
     $scope.sortInfo = {fields: ['id'], directions: ['asc']};
-    $scope.persons = {currentPage: 1};
+    $scope.cidades = {currentPage: 1};
 
     $scope.gridOptions = {
-        data: 'persons.list',
+        data: 'cidades.list',
         useExternalSorting: true,
         sortInfo: $scope.sortInfo,
 
         columnDefs: [
-            { field: 'id', displayName: 'Id' },
-            { field: 'name', displayName: 'Name' },
-            { field: 'description', displayName: 'Description' },
+            { field: 'id', displayName: 'Código' },
+            { field: 'nomeCid', displayName: 'Descrição' },
+            { field: 'siglaUf', displayName: 'UF' },
             { field: '', width: 30, cellTemplate: '<span class="glyphicon glyphicon-remove remove" ng-click="deleteRow(row)"></span>' }
         ],
 
@@ -23,27 +23,27 @@ app.controller('personsListController', function ($scope, $rootScope, personServ
         // Broadcasts an event when a row is selected, to signal the form that it needs to load the row data.
         afterSelectionChange: function (rowItem) {
             if (rowItem.selected) {
-                $rootScope.$broadcast('personSelected', $scope.gridOptions.selectedItems[0].id);
+                $rootScope.$broadcast('cidadeSelected', $scope.gridOptions.selectedItems[0].id);
             }
         }
     };
 
     // Refresh the grid, calling the appropriate rest method.
     $scope.refreshGrid = function () {
-        var listPersonsArgs = {
-            page: $scope.persons.currentPage,
+        var listCidadesArgs = {
+            page: $scope.cidades.currentPage,
             sortFields: $scope.sortInfo.fields[0],
             sortDirections: $scope.sortInfo.directions[0]
         };
 
-        personService.get(listPersonsArgs, function (data) {
-            $scope.persons = data;
+        cidadeService.get(listCidadesArgs, function (data) {
+            $scope.cidades = data;
         })
     };
 
     // Broadcast an event when an element in the grid is deleted. No real deletion is perfomed at this point.
     $scope.deleteRow = function (row) {
-        $rootScope.$broadcast('deletePerson', row.entity.id);
+        $rootScope.$broadcast('deleteCidade', row.entity.id);
     };
 
     // Watch the sortInfo variable. If changes are detected than we need to refresh the grid.
@@ -72,27 +72,27 @@ app.controller('personsListController', function ($scope, $rootScope, personServ
 });
 
 // Create a controller with name personsFormController to bind to the form section.
-app.controller('personsFormController', function ($scope, $rootScope, personService) {
+app.controller('cidadesFormController', function ($scope, $rootScope, cidadeService) {
     // Clears the form. Either by clicking the 'Clear' button in the form, or when a successfull save is performed.
     $scope.clearForm = function () {
-        $scope.person = null;
+        $scope.cidade = null;
         // For some reason, I was unable to clear field values with type 'url' if the value is invalid.
         // This is a workaroud. Needs proper investigation.
         document.getElementById('imageUrl').value = null;
         // Resets the form validation state.
-        $scope.personForm.$setPristine();
+        $scope.cidadeForm.$setPristine();
         // Broadcast the event to also clear the grid selection.
         $rootScope.$broadcast('clear');
     };
 
     // Calls the rest method to save a person.
-    $scope.updatePerson = function () {
-        personService.save($scope.person).$promise.then(
+    $scope.updateCidade = function () {
+        cidadeService.save($scope.cidade).$promise.then(
             function () {
                 // Broadcast the event to refresh the grid.
                 $rootScope.$broadcast('refreshGrid');
                 // Broadcast the event to display a save message.
-                $rootScope.$broadcast('personSaved');
+                $rootScope.$broadcast('cidadeSaved');
                 $scope.clearForm();
             },
             function () {
@@ -103,19 +103,19 @@ app.controller('personsFormController', function ($scope, $rootScope, personServ
 
     // Picks up the event broadcasted when the person is selected from the grid and perform the person load by calling
     // the appropiate rest service.
-    $scope.$on('personSelected', function (event, id) {
-        $scope.person = personService.get({id: id});
+    $scope.$on('cidadeSelected', function (event, id) {
+        $scope.cidade = cidadeService.get({id: id});
     });
 
     // Picks us the event broadcasted when the person is deleted from the grid and perform the actual person delete by
     // calling the appropiate rest service.
-    $scope.$on('deletePerson', function (event, id) {
-        personService.delete({id: id}).$promise.then(
+    $scope.$on('deleteCidade', function (event, id) {
+        cidadeService.delete({id: id}).$promise.then(
             function () {
                 // Broadcast the event to refresh the grid.
                 $rootScope.$broadcast('refreshGrid');
                 // Broadcast the event to display a delete message.
-                $rootScope.$broadcast('personDeleted');
+                $rootScope.$broadcast('cidadeDeleted');
                 $scope.clearForm();
             },
             function () {
@@ -128,23 +128,23 @@ app.controller('personsFormController', function ($scope, $rootScope, personServ
 // Create a controller with name alertMessagesController to bind to the feedback messages section.
 app.controller('alertMessagesController', function ($scope) {
     // Picks up the event to display a saved message.
-    $scope.$on('personSaved', function () {
+    $scope.$on('cidadeSaved', function () {
         $scope.alerts = [
-            { type: 'success', msg: 'Record saved successfully!' }
+            { type: 'success', msg: 'Registro salvo com sucesso!' }
         ];
     });
 
     // Picks up the event to display a deleted message.
-    $scope.$on('personDeleted', function () {
+    $scope.$on('cidadeDeleted', function () {
         $scope.alerts = [
-            { type: 'success', msg: 'Record deleted successfully!' }
+            { type: 'success', msg: 'Registro excluído com sucesso!' }
         ];
     });
 
     // Picks up the event to display a server error message.
     $scope.$on('error', function () {
         $scope.alerts = [
-            { type: 'danger', msg: 'There was a problem in the server!' }
+            { type: 'danger', msg: 'Erro no servidor! Contate o suporte.' }
         ];
     });
 
@@ -154,6 +154,6 @@ app.controller('alertMessagesController', function ($scope) {
 });
 
 // Service that provides persons operations
-app.factory('personService', function ($resource) {
-    return $resource('resources/persons/:id');
+app.factory('cidadeService', function ($resource) {
+    return $resource('api/cidades/:id');
 });

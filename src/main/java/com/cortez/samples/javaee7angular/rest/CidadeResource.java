@@ -70,6 +70,7 @@ public class CidadeResource {
 
     @POST
     public Cidades saveCidade(Cidades cidade) {
+        entityManager.getTransaction().begin();
         if (cidade.getId() == null) {
             Cidades cidadeToSave = new Cidades();
             cidadeToSave.setNomeCid(cidade.getNomeCid());
@@ -83,13 +84,15 @@ public class CidadeResource {
             cidadeToUpdate.setStatusCid(cidade.getStatusCid());
             cidade = entityManager.merge(cidadeToUpdate);
         }
-
+        entityManager.getTransaction().commit();
         return cidade;
     }
 
     @DELETE
     @Path("{id}")
     public void deleteCidade(@PathParam("id") Long id) {
+        entityManager.getTransaction().begin();
         entityManager.remove(getCidade(id));
+        entityManager.getTransaction().commit();
     }
 }
