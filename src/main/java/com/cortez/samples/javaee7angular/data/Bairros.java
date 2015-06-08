@@ -13,7 +13,7 @@ public class Bairros {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "IDBAI")
-    @SequenceGenerator(name = "IDBAI", sequenceName = "Bairros")
+    @SequenceGenerator(name = "IDBAI", sequenceName = "SEQ_BAIRROS", allocationSize = 1)
     @Column(name = "IDBAI")
     private Long id;
     
@@ -45,6 +45,16 @@ public class Bairros {
 
     public void setStatusBai(final String statusBai) {
         this.statusBai = statusBai;
+    }
+
+    @Override
+    public int hashCode() {
+         return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
     }
     
 }

@@ -1,7 +1,6 @@
 package com.cortez.samples.javaee7angular.rest;
 
 import com.cortez.samples.javaee7angular.data.Bairros;
-import com.cortez.samples.javaee7angular.data.Cidades;
 import com.cortez.samples.javaee7angular.pagination.PaginatedListWrapper;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -78,6 +77,7 @@ public class BairroResource {
 
     @POST
     public Bairros saveBairro(Bairros bairro) {
+        entityManager.getTransaction().begin();
         if (bairro.getId() == null) {
             Bairros bairroToSave = new Bairros();
             bairroToSave.setDescricao(bairro.getDescricao());
@@ -89,14 +89,16 @@ public class BairroResource {
             bairroToUpdate.setStatusBai(bairro.getStatusBai());
             bairro = entityManager.merge(bairroToUpdate);
         }
-
+        entityManager.getTransaction().commit();
         return bairro;
     }
 
     @DELETE
     @Path("{id}")
     public void deleteBairro(@PathParam("id") Long id) {
+        entityManager.getTransaction().begin();
         entityManager.remove(getBairros(id));
+        entityManager.getTransaction().commit();
     }
 
 }
