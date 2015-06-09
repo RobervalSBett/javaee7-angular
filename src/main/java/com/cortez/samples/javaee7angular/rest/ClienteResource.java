@@ -1,5 +1,4 @@
 package com.cortez.samples.javaee7angular.rest;
-
 import com.cortez.samples.javaee7angular.data.Clientes;
 import com.cortez.samples.javaee7angular.pagination.PaginatedListWrapper;
 import java.util.List;
@@ -39,7 +38,7 @@ public class ClienteResource
     @SuppressWarnings("unchecked")
     private List<Clientes> findClientes(int startPosition, int maxResults, String sortFields, String sortDirections) {
         Query query =
-                entityManager.createQuery("SELECT cli.ID FROM CLIENTES CLI ORDER BY CLI." + sortFields + " " + sortDirections);
+                entityManager.createQuery("SELECT cli FROM Clientes cli ORDER BY cli." + sortFields + " " + sortDirections);
         query.setFirstResult(startPosition);
         query.setMaxResults(maxResults);
         return query.getResultList();
@@ -82,6 +81,7 @@ public class ClienteResource
 
     @POST
     public Clientes saveClientes(Clientes cliente) {
+        entityManager.getTransaction().begin();
         if (cliente.getId() == null) {
             Clientes clienteToSave = new Clientes();            
             clienteToSave.setCep(cliente.getCep());
@@ -117,13 +117,16 @@ public class ClienteResource
             clienteToUpdate.setStatusCli(cliente.getStatusCli());
             cliente = entityManager.merge(clienteToUpdate);
         }
+        entityManager.getTransaction().commit();
         return cliente;
     }
 
     @DELETE
     @Path("{id}")
     public void deleteCliente(@PathParam("id") Long id) {
+        entityManager.getTransaction().begin();
         entityManager.remove(getClientes(id));
+        entityManager.getTransaction().commit();
     }   
       
 }

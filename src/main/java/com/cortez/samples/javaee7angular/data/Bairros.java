@@ -14,7 +14,7 @@ public class Bairros {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "IDBAI")
     @SequenceGenerator(name = "IDBAI", sequenceName = "SEQ_BAIRROS", allocationSize = 1)
-    @Column(name = "IDBAI")
+    @Column(name = "idbai")
     private Long id;
     
     @Column(name = "DESCRIBAI", length = 60)

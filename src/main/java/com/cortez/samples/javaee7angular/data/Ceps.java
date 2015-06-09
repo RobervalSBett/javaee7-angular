@@ -12,8 +12,8 @@ public class Ceps
 {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "IDCEP")
-    @SequenceGenerator(name = "IDCEP", sequenceName = "CEPS")
-    @Column(name = "IDCEP")
+    @SequenceGenerator(name = "IDCEP", sequenceName = "SEQ_CEPS")
+    @Column(name = "idcep")
     private Long id;     
     
     @Column(name = "CEP",length = 8)
@@ -89,4 +89,13 @@ public class Ceps
     public void setStatusCep(final String statusCep) {
         this.statusCep = statusCep;
     }   
+    
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
 }

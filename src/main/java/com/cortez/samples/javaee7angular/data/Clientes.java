@@ -1,6 +1,7 @@
 
 package com.cortez.samples.javaee7angular.data;
 
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,12 +11,11 @@ import javax.persistence.SequenceGenerator;
 
 @Entity
 public class Clientes 
-{
-    
+{    
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "IDCLI")
-    @SequenceGenerator(name = "IDCLI", sequenceName = "CLIENTES")
-    @Column(name = "IDCLI")
+    @SequenceGenerator(name = "IDCLI", sequenceName = "seq_clientes", allocationSize = 1)
+    @Column(name = "idcli")
     private Long id;
     
     @Column(name = "CEP", length =8 )
@@ -181,7 +181,14 @@ public class Clientes
         this.emailContato = emailContato;
     }
 
-    
-    
-    
+    @Override
+    public int hashCode() {
+        return super.hashCode() ;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
+
 }

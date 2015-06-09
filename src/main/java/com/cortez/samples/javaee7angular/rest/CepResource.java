@@ -77,6 +77,7 @@ public class CepResource {
 
     @POST
     public Ceps saveCep(Ceps cep) {
+        entityManager.getTransaction().begin();
         if (cep.getId() == null) {
             Ceps cepToSave = new Ceps();
             cepToSave.setCep(cep.getCep());
@@ -96,14 +97,17 @@ public class CepResource {
             cepToUpdate.setStatusCep(cep.getStatusCep());
             cep = entityManager.merge(cepToUpdate);
         }
-
+        entityManager.getTransaction().commit();
         return cep;
     }
 
     @DELETE
     @Path("{id}")
     public void deleteCep(@PathParam("id") Long id) {
+        entityManager.getTransaction().begin();
         entityManager.remove(getCeps(id));
+        entityManager.getTransaction().commit();
+        
     }
 
 }
