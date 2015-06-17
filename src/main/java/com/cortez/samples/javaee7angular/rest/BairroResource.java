@@ -37,13 +37,13 @@ public class BairroResource {
     @SuppressWarnings("unchecked")
     private List<Bairros> findBairros(int startPosition, int maxResults, String sortFields, String sortDirections) {
         Query query
-                = entityManager.createQuery("SELECT b FROM BAIRROS b ORDER BY b." + sortFields + " " + sortDirections);
+                = entityManager.createQuery("SELECT b FROM Bairros b ORDER BY b." + sortFields + " " + sortDirections);
         query.setFirstResult(startPosition);
         query.setMaxResults(maxResults);
         return query.getResultList();
     }
 
-    private PaginatedListWrapper findBairros(PaginatedListWrapper wrapper) {
+    private PaginatedListWrapper<Bairros> findBairros(PaginatedListWrapper<Bairros> wrapper) {
         wrapper.setTotalResults(countBairros());
         int start = (wrapper.getCurrentPage() - 1) * wrapper.getPageSize();
         wrapper.setList(findBairros(start,
@@ -61,7 +61,7 @@ public class BairroResource {
             @QueryParam("sortFields") String sortFields,
             @DefaultValue("asc")
             @QueryParam("sortDirections") String sortDirections) {
-        PaginatedListWrapper paginatedListWrapper = new PaginatedListWrapper();
+        PaginatedListWrapper<Bairros> paginatedListWrapper = new PaginatedListWrapper<>();
         paginatedListWrapper.setCurrentPage(page);
         paginatedListWrapper.setSortFields(sortFields);
         paginatedListWrapper.setSortDirections(sortDirections);

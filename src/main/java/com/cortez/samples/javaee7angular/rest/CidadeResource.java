@@ -36,7 +36,7 @@ public class CidadeResource {
         return query.getResultList();
     }
 
-    private PaginatedListWrapper findCidades(PaginatedListWrapper wrapper) {
+    private PaginatedListWrapper<Cidades> findCidades(PaginatedListWrapper<Cidades> wrapper) {
         wrapper.setTotalResults(countCidades());
         int start = (wrapper.getCurrentPage() - 1) * wrapper.getPageSize();
         wrapper.setList(findCidades(start,
@@ -54,7 +54,7 @@ public class CidadeResource {
             @QueryParam("sortFields") String sortFields,
             @DefaultValue("asc")
             @QueryParam("sortDirections") String sortDirections) {
-        PaginatedListWrapper paginatedListWrapper = new PaginatedListWrapper();
+        PaginatedListWrapper<Cidades> paginatedListWrapper = new PaginatedListWrapper<>();
         paginatedListWrapper.setCurrentPage(page);
         paginatedListWrapper.setSortFields(sortFields);
         paginatedListWrapper.setSortDirections(sortDirections);
@@ -62,6 +62,11 @@ public class CidadeResource {
         return findCidades(paginatedListWrapper);
     }
 
+//    @GET
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public List<Cidades> list() {
+//        return findCidades(0, 100, "id", "desc");
+//    }
     @GET
     @Path("{id}")
     public Cidades getCidade(@PathParam("id") Long id) {
@@ -95,4 +100,5 @@ public class CidadeResource {
         entityManager.remove(getCidade(id));
         entityManager.getTransaction().commit();
     }
+
 }

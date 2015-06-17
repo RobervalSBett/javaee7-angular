@@ -37,7 +37,7 @@ public class CepResource {
     @SuppressWarnings("unchecked")
     private List<Ceps> findCeps(int startPosition, int maxResults, String sortFields, String sortDirections) {
         Query query
-                = entityManager.createQuery("SELECT cep FROM CEPS cep ORDER BY cep." + sortFields + " " + sortDirections);
+                = entityManager.createQuery("SELECT cep FROM Ceps cep ORDER BY cep." + sortFields + " " + sortDirections);
         query.setFirstResult(startPosition);
         query.setMaxResults(maxResults);
         return query.getResultList();

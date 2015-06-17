@@ -1,10 +1,12 @@
 package com.cortez.samples.javaee7angular.pagination;
 
 
+import com.cortez.samples.javaee7angular.data.Cidades;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.List;
+import javax.xml.bind.annotation.XmlAnyElement;
 
 /**
  * Wraps all the information needed to paginate a table.
@@ -19,7 +21,7 @@ public class PaginatedListWrapper<T> implements Serializable {
 
     private String sortFields;
     private String sortDirections;
-    @XmlElement
+    @XmlAnyElement(lax = true)
     private List<T> list;
 
     public Integer getCurrentPage() {
@@ -62,7 +64,7 @@ public class PaginatedListWrapper<T> implements Serializable {
         this.sortDirections = sortDirections;
     }
 
-    public List getList() {
+    public List<T> getList() {
         return list;
     }
 

@@ -1,14 +1,17 @@
 package com.cortez.samples.javaee7angular.data;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
-public class Cidades {
+@XmlRootElement
+public class Cidades implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "IDCID")
@@ -61,6 +64,7 @@ public class Cidades {
     public boolean equals(Object obj) {
         return super.equals(obj);
     }
+
     @Override
     public int hashCode() {
         return super.hashCode();

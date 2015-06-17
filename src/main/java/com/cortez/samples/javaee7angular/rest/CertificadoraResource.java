@@ -26,14 +26,14 @@ public class CertificadoraResource
     
 
     private Integer countCertificadoras() {
-        Query query = entityManager.createQuery("SELECT COUNT(cert.id) FROM Certificadora cert");
+        Query query = entityManager.createQuery("SELECT COUNT(cert.id) FROM Certificadoras cert");
         return ((Long) query.getSingleResult()).intValue();
     }
 
     @SuppressWarnings("unchecked")
     private List<Certificadoras> findCertificadoras(int startPosition, int maxResults, String sortFields, String sortDirections) {
         Query query =
-                entityManager.createQuery("SELECT cert.ID FROM CERTIFICADORA CERT ORDER BY CERT." + sortFields + " " + sortDirections);
+                entityManager.createQuery("SELECT cert.ID FROM Certificadoras CERT ORDER BY CERT." + sortFields + " " + sortDirections);
         query.setFirstResult(startPosition);
         query.setMaxResults(maxResults);
         return query.getResultList();

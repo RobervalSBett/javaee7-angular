@@ -1,27 +1,29 @@
 package com.cortez.samples.javaee7angular.data;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
-
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
-public class Bairros {
+@XmlRootElement
+public class Bairros implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "IDBAI")
     @SequenceGenerator(name = "IDBAI", sequenceName = "SEQ_BAIRROS", allocationSize = 1)
     @Column(name = "idbai")
     private Long id;
-    
+
     @Column(name = "DESCRIBAI", length = 60)
     private String descricao;
-    
+
     @Column(name = "STATUSBAI", length = 1)
-    private String statusBai; 
+    private String statusBai;
 
     public Long getId() {
         return id;
@@ -49,12 +51,12 @@ public class Bairros {
 
     @Override
     public int hashCode() {
-         return super.hashCode();
+        return super.hashCode();
     }
 
     @Override
     public boolean equals(Object obj) {
         return super.equals(obj);
     }
-    
+
 }

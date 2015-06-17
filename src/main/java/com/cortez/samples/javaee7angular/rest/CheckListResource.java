@@ -35,7 +35,7 @@ public class CheckListResource
     private List<CheckList> findCheckList(int startPosition, int maxResults, String sortFields, String sortDirections)
     {
         Query query =
-                entityManager.createQuery("SELECT chkl FROM checklist au ORDER BY chkl." + sortFields + " " + sortDirections);
+                entityManager.createQuery("SELECT chkl FROM CheckList au ORDER BY chkl." + sortFields + " " + sortDirections);
         query.setFirstResult(startPosition);
         query.setMaxResults(maxResults);
         return query.getResultList();
