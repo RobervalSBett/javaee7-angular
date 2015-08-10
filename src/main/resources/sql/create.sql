@@ -1,249 +1,246 @@
-CREATE SEQUENCE ID START WITH 100
-CREATE TABLE PERSON("ID" INTEGER not null primary key, "NAME" VARCHAR(50), "DESCRIPTION" VARCHAR(100), "IMAGEURL" VARCHAR(500))
-
-CREATE SEQUENCE UF;
+CREATE SEQUENCE SEQ_UF;
 CREATE DOMAIN UF AS VARCHAR(2) 
 DEFAULT 'SC' NOT NULL
 CHECK (VALUE IN('MG','SP','RJ','AC','AL','AP','AM','BA','CE','DF','ES','GO', 'MA','MS','MT','PA','PB','PE','PI','PR','RN','RO','RR','RS', 'SC','SE','TO' ));
 
 /*==============================================================*/
-CREATE SEQUENCE Bairros START WITH 1
-create table Bairros ("IDBAI"     INT4 not null, 
-                      "DESCRIBAI" VARCHAR(60) null, 
-                      "STATUSBAI" VARCHAR(1) null,
-constraint PK_BAIRROS primary key (IDBAI))
-create unique index BAIRROS_PK on Bairros ("IDBAI");
+CREATE SEQUENCE SEQ_BAIRROS START WITH 1;
+CREATE TABLE BAIRROS (IDBAI     INT4 NOT NULL, 
+                      DESCRIBAI VARCHAR(60) NULL, 
+                      STATUSBAI VARCHAR(1) NULL,
+CONSTRAINT PK_BAIRROS PRIMARY KEY (IDBAI));
+CREATE UNIQUE INDEX BAIRROS_PK ON BAIRROS (IDBAI);
 /*==============================================================*/
-CREATE SEQUENCE CIDADES START WITH 1
-create table Cidades ("IDCID"      INT4  not null,
-                      "DESCRICID"  VARCHAR(60) null,
-                      "UFCID"      UF  null,
-                      "STATUSCID"  VARCHAR(1) Nnull,
-constraint PK_CIDADES primary key (IDCID));
-create unique index CIDADES_PK on Cidades (IDCID);
+CREATE SEQUENCE SEQ_CIDADES START WITH 1;
+CREATE TABLE CIDADES (IDCID      INT4  NOT NULL,
+                      DESCRICID  VARCHAR(60) NULL,
+                      UFCID      UF  NULL,
+                      STATUSCID  VARCHAR(1) NULL,
+CONSTRAINT PK_CIDADES PRIMARY KEY (IDCID));
+CREATE UNIQUE INDEX CIDADES_PK ON CIDADES (IDCID);
 
 /*==============================================================*/
-CREATE SEQUENCE CEPS 
-create table Ceps ("CEP"       VARCHAR(8)   not null,
-                   "IDCID"     INT4         not null,
-                   "IDBAI"     INT4         not null,
-                   "LOGRACEP"  VARCHAR(60)  null,
-                   "OBSCEP"    VARCHAR(100) null,
-                   "STATUSCEP" VARCHAR(1)   NULL,
-constraint PK_CEPS primary key (CEP) );
-create unique index CEPS_PK on Ceps (CEP);
-create  index ASSOCCEPBAI_FK on Ceps (IDBAI);
-create  index ASSOCCEPSCID_FK on Ceps (IDCID);
-alter table Ceps
-   add constraint FKBAICEP foreign key (IDBAI)
-   references Bairros (IDBAI)
-   on delete restrict on update restrict;
-alter table Ceps
-   add constraint FKCIDCEP foreign key (IDCID)
-   references Cidades (IDCID)
-   on delete restrict on update restrict;
+CREATE SEQUENCE SEQ_CEPS;
+CREATE TABLE CEPS (CEP       VARCHAR(8)   NOT NULL,
+                   IDCID     INT4         NOT NULL,
+                   IDBAI     INT4         NOT NULL,
+                   LOGRACEP  VARCHAR(60)  NULL,
+                   OBSCEP    VARCHAR(100) NULL,
+                   STATUSCEP VARCHAR(1)   NULL,
+CONSTRAINT PK_CEPS PRIMARY KEY (CEP) );
+CREATE UNIQUE INDEX CEPS_PK ON CEPS (CEP);
+CREATE  INDEX ASSOCCEPBAI_FK ON CEPS (IDBAI);
+CREATE  INDEX ASSOCCEPSCID_FK ON CEPS (IDCID);
+ALTER TABLE CEPS
+   ADD CONSTRAINT FKBAICEP FOREIGN KEY (IDBAI)
+   REFERENCES BAIRROS (IDBAI)
+   ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE CEPS
+   ADD CONSTRAINT FKCIDCEP FOREIGN KEY (IDCID)
+   REFERENCES CIDADES (IDCID)
+   ON DELETE RESTRICT ON UPDATE RESTRICT;
 /*==============================================================*/
-CREATE SEQUENCE AUDITORES START WITH 1
-create table Auditores ("IDAUDITOR" INT4          not null,
-                        "CEP"        VARCHAR(8)   null,
-                        "NOMEAUDIT"  VARCHAR(60)   null,
-                        "CPFAUDIT"   VARCHAR(11)    null,
-                        "FONE1AUDIT" VARCHAR(12)  null,
-                        "FONE2AUDIT" VARCHAR(12)  null,
-                        "EMAILAUDIT" VARCHAR(100) null,
-                        "TIPOAUDIT"  VARCHAR(1)   null,
-                        "COMPLEENDAUDIT" VARCHAR(60) null,
-                        "OBSAUDIT" VARCHAR(100) null,
-                        "USUAUDIT" VARCHAR(10) null,
-                        "SENHAUDIT" VARCHAR(8) null,
-                        "STATUSAUDITORES" VARCHAR(1)
-                        constraint PK_AUDITORES primary key (IDAUDITOR));
-create unique index AUDITORES_PK on Auditores (IDAUDITOR);
-alter table Auditores
-   add constraint FKAUDITORESCEP foreign key (CEP)
-   references Ceps (CEP)
-   on delete restrict on update restrict;
+CREATE SEQUENCE SEQ_AUDITORES START WITH 1;
+CREATE TABLE AUDITORES (IDAUDITOR INT4          NOT NULL,
+                        CEP        VARCHAR(8)   NULL,
+                        NOMEAUDIT  VARCHAR(60)   NULL,
+                        CPFAUDIT   VARCHAR(11)    NULL,
+                        FONE1AUDIT VARCHAR(12)  NULL,
+                        FONE2AUDIT VARCHAR(12)  NULL,
+                        EMAILAUDIT VARCHAR(100) NULL,
+                        TIPOAUDIT  VARCHAR(1)   NULL,
+                        COMPLEENDAUDIT VARCHAR(60) NULL,
+                        OBSAUDIT VARCHAR(100) NULL,
+                        USUAUDIT VARCHAR(10) NULL,
+                        SENHAUDIT VARCHAR(8) NULL,
+                        STATUSAUDITORES VARCHAR(1),
+                        CONSTRAINT PK_AUDITORES PRIMARY KEY (IDAUDITOR));
+CREATE UNIQUE INDEX AUDITORES_PK ON AUDITORES (IDAUDITOR);
+ALTER TABLE AUDITORES
+   ADD CONSTRAINT FKAUDITORESCEP FOREIGN KEY (CEP)
+   REFERENCES CEPS (CEP)
+   ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 /*==============================================================*/
-CREATE SEQUENCE CLIENTES START WITH 1
-create table Clientes ("IDCLI"        int4         not null,
-                       "CEP"          VARCHAR(8)   not null,
-                       "RAZAOCLI"     VARCHAR(60)  null,
-                       "FANTACLI"     VARCHAR(60)  null,
-                       "COMPLEENDCLI" VARCHAR(60)  null,
-                       "FONE1CLI"     VARCHAR(12)  null,
-                       "FONE2CLI"     VARCHAR(12)  null,
-                       "EMAILCLI"     VARCHAR(100) null,
-                       "SITECLI"      VARCHAR(100) null,
-                       "CONTATOCLI"   VARCHAR(60)  null,
-                       "EMAILCONTATO" VARCHAR(100) null,
-                       "CNPJCLI"      VARCHAR(14)  null,
-                       "INSCRICLI"    VARCHAR(14)  null,
-                       "OBSCLI"       VARCHAR(100) null,
-                       "STATUSCLI"    VARCHAR(1)   null,
-constraint PK_CLIENTES primary key (IDCLI));
-create unique index CLIENTES_PK on Clientes (IDCLI);
-alter table Clientes
-   add constraint FKCLICEP foreign key (CEP)
-   references Ceps (CEP)
-   on delete restrict on update restrict;
+CREATE SEQUENCE SEQ_CLIENTES START WITH 1;
+CREATE TABLE CLIENTES (IDCLI        INT4         NOT NULL,
+                       CEP          VARCHAR(8)   NOT NULL,
+                       RAZAOCLI     VARCHAR(60)  NULL,
+                       FANTACLI     VARCHAR(60)  NULL,
+                       COMPLEENDCLI VARCHAR(60)  NULL,
+                       FONE1CLI     VARCHAR(12)  NULL,
+                       FONE2CLI     VARCHAR(12)  NULL,
+                       EMAILCLI     VARCHAR(100) NULL,
+                       SITECLI      VARCHAR(100) NULL,
+                       CONTATOCLI   VARCHAR(60)  NULL,
+                       EMAILCONTATO VARCHAR(100) NULL,
+                       CNPJCLI      VARCHAR(14)  NULL,
+                       INSCRICLI    VARCHAR(14)  NULL,
+                       OBSCLI       VARCHAR(100) NULL,
+                       STATUSCLI    VARCHAR(1)   NULL,
+CONSTRAINT PK_CLIENTES PRIMARY KEY (IDCLI));
+CREATE UNIQUE INDEX CLIENTES_PK ON CLIENTES (IDCLI);
+ALTER TABLE CLIENTES
+   ADD CONSTRAINT FKCLICEP FOREIGN KEY (CEP)
+   REFERENCES CEPS (CEP)
+   ON DELETE RESTRICT ON UPDATE RESTRICT;
 /*==============================================================*/
-CREATE SEQUENCE COLABORADORES START WITH 1
-create table Colaboradores ("IDCOLA"     INT4         not null,
-                            "NOMECOLA"   VARCHAR(60)  null,
-                            "FONE1COLA"  VARCHAR(12)  null,
-                            "FONE2COLA"  VARCHAR(12)  null,
-                            "EMAILCOLA"  VARCHAR(100) null,
-                            "OBSCOLA"    VARCHAR(100) null,
-                            "STATUSCOLA" VARCHAR(1)   null,
-constraint PK_COLABORADORES primary key (IDCOLA));
-create unique index COLABORADORES_PK on Colaboradores (IDCOLA);
+CREATE SEQUENCE SEQ_COLABORADORES START WITH 1;
+CREATE TABLE COLABORADORES (IDCOLA     INT4         NOT NULL,
+                            NOMECOLA   VARCHAR(60)  NULL,
+                            FONE1COLA  VARCHAR(12)  NULL,
+                            FONE2COLA  VARCHAR(12)  NULL,
+                            EMAILCOLA  VARCHAR(100) NULL,
+                            OBSCOLA    VARCHAR(100) NULL,
+                            STATUSCOLA VARCHAR(1)   NULL,
+CONSTRAINT PK_COLABORADORES PRIMARY KEY (IDCOLA));
+CREATE UNIQUE INDEX COLABORADORES_PK ON COLABORADORES (IDCOLA);
 /*==============================================================*/
-CREATE SEQUENCE CERTIFICADORAS START WITH 1
-create table Certificadoras ("IDCERT"        INT4    not null,
-                             "CEP"           VARCHAR(8) not null,
-                             "RAZAOCERT"     VARCHAR(60) null,
-                             "FANTACERT"     VARCHAR(60) null,
-                             "COMPLEENDCERT" VARCHAR(60)  null,
-                             "FONE1CERT"     VARCHAR(12)  null,
-                             "FONE2CERT"     VARCHAR(12)  null,
-                             "EMAILCERT"     VARCHAR(100) null,
-                             "SITECERT"      VARCHAR(100) null,
-                             "CONTATOCERT"   VARCHAR(60)  null,
-                             "CNPJCERT"      VARCHAR(14)  null,
-                             "INSCRICERT"    VARCHAR(14)  null,
-                             "OBSCERT"       VARCHAR(100) null,
-                             "STATUSCERT"    VARCHAR(1)   null,
-constraint PK_CERTIFICADORAS primary key (IDCERT));
-create unique index CERTIFICADORAS_PK on Certificadoras (IDCERT);
-create  index ASSOCCERTICEPS_FK on Certificadoras (CEP);
-alter table Certificadoras
-   add constraint FKCEPCERTI foreign key (CEP)
-   references Ceps (CEP)
-   on delete restrict on update restrict;
+CREATE SEQUENCE SEQ_CERTIFICADORAS START WITH 1;
+CREATE TABLE CERTIFICADORAS (IDCERT        INT4    NOT NULL,
+                             CEP           VARCHAR(8) NOT NULL,
+                             RAZAOCERT     VARCHAR(60) NULL,
+                             FANTACERT     VARCHAR(60) NULL,
+                             COMPLEENDCERT VARCHAR(60)  NULL,
+                             FONE1CERT     VARCHAR(12)  NULL,
+                             FONE2CERT     VARCHAR(12)  NULL,
+                             EMAILCERT     VARCHAR(100) NULL,
+                             SITECERT      VARCHAR(100) NULL,
+                             CONTATOCERT   VARCHAR(60)  NULL,
+                             CNPJCERT      VARCHAR(14)  NULL,
+                             INSCRICERT    VARCHAR(14)  NULL,
+                             OBSCERT       VARCHAR(100) NULL,
+                             STATUSCERT    VARCHAR(1)   NULL,
+CONSTRAINT PK_CERTIFICADORAS PRIMARY KEY (IDCERT));
+CREATE UNIQUE INDEX CERTIFICADORAS_PK ON CERTIFICADORAS (IDCERT);
+CREATE  INDEX ASSOCCERTICEPS_FK ON CERTIFICADORAS (CEP);
+ALTER TABLE CERTIFICADORAS
+   ADD CONSTRAINT FKCEPCERTI FOREIGN KEY (CEP)
+   REFERENCES CEPS (CEP)
+   ON DELETE RESTRICT ON UPDATE RESTRICT;
 /*==============================================================*/
 
-CREATE SEQUENCE AUDITORIAS START WITH 1
-create table Auditorias ("IDAUDIT"          INT4         not  null,
-                         "IDCERT"           INT4         not  null,
-                         "IDCLI"            INT4         not  null,
-                         "DESCRIAUDIT"      VARCHAR(254) null,
-                         "DESCRIOBJAUDIT"   VARCHAR(254) null,
-                         "DTHRCADAUDIT"     TIMESTAMP    null,
-                         "DTHRINIAUDIT"     TIMESTAMP    null,
-                         "DTHRREALIAUDIT"   TIMESTAMP    null,
-                         "DTATUALIZA"       TIMESTAMP    null,
-                         "STATUSNC"         VARCHAR(1)   null,
-                         "OBSAUDIT"         VARCHAR(100) null,
-constraint PK_AUDITORIAS primary key (IDAUDIT));
-create unique index AUDITORIAS_PK on Auditorias (IDAUDIT);
-create  index ASSOCCERTAUDITORIA_FK on Auditorias (IDCERT);
-create  index ASSOCCLIAUDIT_FK on Auditorias (IDCLI);
-alter table Auditorias
-   add constraint FKCERTAUDIT foreign key (IDCERT)
-   references Certificadoras (IDCERT)
-   on delete restrict on update restrict;
+CREATE SEQUENCE SEQ_AUDITORIAS START WITH 1;
+CREATE TABLE AUDITORIAS (IDAUDIT          INT4         NOT  NULL,
+                         IDCERT           INT4         NOT  NULL,
+                         IDCLI            INT4         NOT  NULL,
+                         DESCRIAUDIT      VARCHAR(254) NULL,
+                         DESCRIOBJAUDIT   VARCHAR(254) NULL,
+                         DTHRCADAUDIT     TIMESTAMP    NULL,
+                         DTHRINIAUDIT     TIMESTAMP    NULL,
+                         DTHRREALIAUDIT   TIMESTAMP    NULL,
+                         DTATUALIZA       TIMESTAMP    NULL,
+                         STATUSNC         VARCHAR(1)   NULL,
+                         OBSAUDIT         VARCHAR(100) NULL,
+CONSTRAINT PK_AUDITORIAS PRIMARY KEY (IDAUDIT));
+CREATE UNIQUE INDEX AUDITORIAS_PK ON AUDITORIAS (IDAUDIT);
+CREATE  INDEX ASSOCCERTAUDITORIA_FK ON AUDITORIAS (IDCERT);
+CREATE  INDEX ASSOCCLIAUDIT_FK ON AUDITORIAS (IDCLI);
+ALTER TABLE AUDITORIAS
+   ADD CONSTRAINT FKCERTAUDIT FOREIGN KEY (IDCERT)
+   REFERENCES CERTIFICADORAS (IDCERT)
+   ON DELETE RESTRICT ON UPDATE RESTRICT;
 
-alter table Auditorias
-   add constraint FKCLIAUDIT foreign key (IDCLI)
-   references Clientes (IDCLI)
-   on delete restrict on update restrict;
+ALTER TABLE AUDITORIAS
+   ADD CONSTRAINT FKCLIAUDIT FOREIGN KEY (IDCLI)
+   REFERENCES CLIENTES (IDCLI)
+   ON DELETE RESTRICT ON UPDATE RESTRICT;
 /*==============================================================*/
-CREATE SEQUENCE EQUIPEAUDITORES START WITH 1
-create table EQUIPEAUDITORES ("IDEQUIPE"      INT4 not null,
-                              "IDAUDITOR"     INT4 null,
-                              "IDAUDIT"       INT4 not null,
-                              "TIPOAUDITOR"   VARCHAR(1) null,
-                              "DTHRINCEQUIPE" TIMESTAMP null,
-                              "STATUSEQUIPE"  VARCHAR(1) null,
-constraint PK_EQUIPEAUDITORES primary key (IDEQUIPE));
-create unique index EQUIPEAUDITORES_PK on EQUIPEAUDITORES (IDEQUIPE);
-create  index ASSOCAUDITORIAEQUIPE_FK on EQUIPEAUDITORES (IDAUDIT);
-create  index ASSOCAUDITEQUIPE_FK on EQUIPEAUDITORES (IDAUDITOR);
-alter table EQUIPEAUDITORES
-   add constraint FKAUDITORESEQUIPE foreign key (IDAUDITOR)
-   references Auditores (IDAUDITOR)
-   on delete restrict on update restrict;
-alter table EQUIPEAUDITORES
-   add constraint FKAUDITEQUIPE foreign key (IDAUDIT)
-   references Auditorias (IDAUDIT)
-   on delete restrict on update restrict;
+CREATE SEQUENCE SEQ_EQUIPEAUDITORES START WITH 1;
+CREATE TABLE EQUIPEAUDITORES (IDEQUIPE      INT4 NOT NULL,
+                              IDAUDITOR     INT4 NULL,
+                              IDAUDIT       INT4 NOT NULL,
+                              TIPOAUDITOR   VARCHAR(1) NULL,
+                              DTHRINCEQUIPE TIMESTAMP NULL,
+                              STATUSEQUIPE  VARCHAR(1) NULL,
+CONSTRAINT PK_EQUIPEAUDITORES PRIMARY KEY (IDEQUIPE));
+CREATE UNIQUE INDEX EQUIPEAUDITORES_PK ON EQUIPEAUDITORES (IDEQUIPE);
+CREATE  INDEX ASSOCAUDITORIAEQUIPE_FK ON EQUIPEAUDITORES (IDAUDIT);
+CREATE  INDEX ASSOCAUDITEQUIPE_FK ON EQUIPEAUDITORES (IDAUDITOR);
+ALTER TABLE EQUIPEAUDITORES
+   ADD CONSTRAINT FKAUDITORESEQUIPE FOREIGN KEY (IDAUDITOR)
+   REFERENCES AUDITORES (IDAUDITOR)
+   ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE EQUIPEAUDITORES
+   ADD CONSTRAINT FKAUDITEQUIPE FOREIGN KEY (IDAUDIT)
+   REFERENCES AUDITORIAS (IDAUDIT)
+   ON DELETE RESTRICT ON UPDATE RESTRICT;
 /*==============================================================*/
-CREATE SEQUENCE CHECKLIST START WITH 1
-create table CheckList ( "IDPONTOCTRL"      INT4         not null,
-                         "IDCOLA"           INT4         not null,
-                         "IDAUDIT"          INT4         not null,
-                         "IDEQUIPE"         INT4         not null,
-                         "DOCPROCESSO"      VARCHAR(12)  null,
-                         "DESCRICHKLIST"    VARCHAR(254) null,
-                         "DTHRREALICHKLIST" TIMESTAMP    null,
-                         "DTATUALIZA"       TIMESTAMP    null,
-                         "OBSCHKLIST"       VARCHAR(254) null,
-                         "STATUSCHKLIST"    VARCHAR(1)   null,
-constraint PK_CHECKLIST primary key (IDPONTOCTRL));
-create unique index CHECKLIST_PK on CheckList (IDPONTOCTRL);
-create  index ASSOCAUDITORIACHKLIST_FK on CheckList (IDAUDIT);
-create  index ASSOCEQUICHKLIST_FK on CheckList (IDEQUIPE);
-create  index ASSOCCOLACHKLST_FK on CheckList (IDCOLA);
-alter table CheckList
-   add constraint FKAUDITCHKLIST foreign key (IDAUDIT)
-   references Auditorias (IDAUDIT)
-   on delete restrict on update restrict;
-alter table CheckList
-   add constraint FKCOLACHKLIST foreign key (IDCOLA)
-   references Colaboradores (IDCOLA)
-   on delete restrict on update restrict;
-alter table CheckList
-   add constraint FKEQUIPECHKLIST foreign key (IDEQUIPE)
-   references EQUIPEAUDITORES (IDEQUIPE)
-   on delete restrict on update restrict;
+CREATE SEQUENCE SEQ_CHECKLIST START WITH 1;
+CREATE TABLE CHECKLIST ( IDPONTOCTRL      INT4         NOT NULL,
+                         IDCOLA           INT4         NOT NULL,
+                         IDAUDIT          INT4         NOT NULL,
+                         IDEQUIPE         INT4         NOT NULL,
+                         DOCPROCESSO      VARCHAR(12)  NULL,
+                         DESCRICHKLIST    VARCHAR(254) NULL,
+                         DTHRREALICHKLIST TIMESTAMP    NULL,
+                         DTATUALIZA       TIMESTAMP    NULL,
+                         OBSCHKLIST       VARCHAR(254) NULL,
+                         STATUSCHKLIST    VARCHAR(1)   NULL,
+CONSTRAINT PK_CHECKLIST PRIMARY KEY (IDPONTOCTRL));
+CREATE UNIQUE INDEX CHECKLIST_PK ON CHECKLIST (IDPONTOCTRL);
+CREATE  INDEX ASSOCAUDITORIACHKLIST_FK ON CHECKLIST (IDAUDIT);
+CREATE  INDEX ASSOCEQUICHKLIST_FK ON CHECKLIST (IDEQUIPE);
+CREATE  INDEX ASSOCCOLACHKLST_FK ON CHECKLIST (IDCOLA);
+ALTER TABLE CHECKLIST
+   ADD CONSTRAINT FKAUDITCHKLIST FOREIGN KEY (IDAUDIT)
+   REFERENCES AUDITORIAS (IDAUDIT)
+   ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE CHECKLIST
+   ADD CONSTRAINT FKCOLACHKLIST FOREIGN KEY (IDCOLA)
+   REFERENCES COLABORADORES (IDCOLA)
+   ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE CHECKLIST
+   ADD CONSTRAINT FKEQUIPECHKLIST FOREIGN KEY (IDEQUIPE)
+   REFERENCES EQUIPEAUDITORES (IDEQUIPE)
+   ON DELETE RESTRICT ON UPDATE RESTRICT;
 /*==============================================================*/
-CREATE SEQUENCE NAOCONFORMIDADES START WITH 1
-create table NaoConformidadeds (
-                                "IDNC"          INT4         not null,
-                                "IDCOLA"        INT4         not null,
-                                "IDPONTOCTRL"   INT4         not null,
-                                "DTHRCADNC"     TIMESTAMP    null,
-                                "DTPREVRESOLNC" TIMESTAMP    null,
-                                "DTATUALIZA"    TIMESTAMP    null,
-                                "DESCRINC"      VARCHAR(254) null,
-                                "SUGESTAONC"    VARCHAR(254) null,
-                                "STATUSNC"      VARCHAR(1)   null,
-                                "OBSNC"         VARCHAR(100) null,
-constraint PK_NAOCONFORMIDADEDS primary key (IDNC));
-create unique index NAOCONFORMIDADEDS_PK on NaoConformidadeds (IDNC);
-create  index ASSOCCHKNC_FK on NaoConformidadeds (IDPONTOCTRL);
-create  index ASSOCCOLANC_FK on NaoConformidadeds (IDCOLA);
-alter table NaoConformidadeds
-   add constraint FKCHKLISTNC foreign key (IDPONTOCTRL)
-   references CheckList (IDPONTOCTRL)
-   on delete restrict on update restrict;
-alter table NaoConformidadeds
-   add constraint FKCOLANC foreign key (IDCOLA)
-   references Colaboradores (IDCOLA)
-   on delete restrict on update restrict;
+CREATE SEQUENCE SEQ_NAOCONFORMIDADES START WITH 1;
+CREATE TABLE NAOCONFORMIDADEDS (
+                                IDNC          INT4         NOT NULL,
+                                IDCOLA        INT4         NOT NULL,
+                                IDPONTOCTRL   INT4         NOT NULL,
+                                DTHRCADNC     TIMESTAMP    NULL,
+                                DTPREVRESOLNC TIMESTAMP    NULL,
+                                DTATUALIZA    TIMESTAMP    NULL,
+                                DESCRINC      VARCHAR(254) NULL,
+                                SUGESTAONC    VARCHAR(254) NULL,
+                                STATUSNC      VARCHAR(1)   NULL,
+                                OBSNC         VARCHAR(100) NULL,
+CONSTRAINT PK_NAOCONFORMIDADEDS PRIMARY KEY (IDNC));
+CREATE UNIQUE INDEX NAOCONFORMIDADEDS_PK ON NAOCONFORMIDADEDS (IDNC);
+CREATE  INDEX ASSOCCHKNC_FK ON NAOCONFORMIDADEDS (IDPONTOCTRL);
+CREATE  INDEX ASSOCCOLANC_FK ON NAOCONFORMIDADEDS (IDCOLA);
+ALTER TABLE NAOCONFORMIDADEDS
+   ADD CONSTRAINT FKCHKLISTNC FOREIGN KEY (IDPONTOCTRL)
+   REFERENCES CHECKLIST (IDPONTOCTRL)
+   ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE NAOCONFORMIDADEDS
+   ADD CONSTRAINT FKCOLANC FOREIGN KEY (IDCOLA)
+   REFERENCES COLABORADORES (IDCOLA)
+   ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 /*==============================================================*/
-CREATE SEQUENCE OCORRENCIAS START WITH 1
-create table Ocorrencias (
-                          "IDOCORRE"     INT4         not null,
-                          "IDPONTOCTRL"  INT4         not null,
-                          "IDCOLA"       INT4         not null,
-                          "DTHROCORRE"   TIMESTAMP    null,
-                          "DTATUALIZA"   TIMESTAMP    null,
-                          "DESCRIOCORRE" VARCHAR(254) null,
-                          "SUGESOCORRE"  VARCHAR(254) null,
-                          "OBSOCORRE"    VARCHAR(100) null,
-                          "STATUSOCORRE" VARCHAR(1)   null,
-constraint PK_OCORRENCIAS primary key (IDOCORRE));
-create unique index OCORRENCIAS_PK on Ocorrencias (IDOCORRE);
-create  index ASSOCCHKOCO_FK on Ocorrencias (IDPONTOCTRL);
-create  index ASSOCCOLAOCO_FK on Ocorrencias (IDCOLA);
-alter table Ocorrencias
-   add constraint FKCHKLISTOCO foreign key (IDPONTOCTRL)
-   references CheckList (IDPONTOCTRL)
-   on delete restrict on update restrict;
-alter table Ocorrencias
-   add constraint FKCOLAOCO foreign key (IDCOLA)
-   references Colaboradores (IDCOLA)
-   on delete restrict on update restrict;
+CREATE SEQUENCE SEQ_OCORRENCIAS START WITH 1;
+CREATE TABLE OCORRENCIAS (
+                          IDOCORRE     INT4         NOT NULL,
+                          IDPONTOCTRL  INT4         NOT NULL,
+                          IDCOLA       INT4         NOT NULL,
+                          DTHROCORRE   TIMESTAMP    NULL,
+                          DTATUALIZA   TIMESTAMP    NULL,
+                          DESCRIOCORRE VARCHAR(254) NULL,
+                          SUGESOCORRE  VARCHAR(254) NULL,
+                          OBSOCORRE    VARCHAR(100) NULL,
+                          STATUSOCORRE VARCHAR(1)   NULL,
+CONSTRAINT PK_OCORRENCIAS PRIMARY KEY (IDOCORRE));
+CREATE UNIQUE INDEX OCORRENCIAS_PK ON OCORRENCIAS (IDOCORRE);
+CREATE  INDEX ASSOCCHKOCO_FK ON OCORRENCIAS (IDPONTOCTRL);
+CREATE  INDEX ASSOCCOLAOCO_FK ON OCORRENCIAS (IDCOLA);
+ALTER TABLE OCORRENCIAS
+   ADD CONSTRAINT FKCHKLISTOCO FOREIGN KEY (IDPONTOCTRL)
+   REFERENCES CHECKLIST (IDPONTOCTRL)
+   ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE OCORRENCIAS
+   ADD CONSTRAINT FKCOLAOCO FOREIGN KEY (IDCOLA)
+   REFERENCES COLABORADORES (IDCOLA)
+   ON DELETE RESTRICT ON UPDATE RESTRICT;
