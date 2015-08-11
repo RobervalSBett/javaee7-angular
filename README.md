@@ -1,35 +1,24 @@
-# Java EE 7 - Angular - Sample Application #
+## SB Admin v2.0 rewritten in AngularJS
 
-## How to run ? ##
+[![Join the chat at https://gitter.im/start-angular/sb-admin-angular](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/start-angular/sb-admin-angular?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-* You need JDK 7 or higher, Maven 3 and Wildfly 8 or Glassfish 4.1 to run the application.
+This project is a port of the famous Free Admin Bootstrap Theme [SB Admin v2.0](http://startbootstrap.com/template-overviews/sb-admin-2/) to Angular Theme.
 
-* Build the code using Maven with the command: `mvn clean install`.
+Find out more [Free Angular Themes at StartAngular.com](http://www.startangular.com/).
 
-* ## Deploy in the Wildfly 8 ##
+## Installation
+1. Clone this project or Download that ZIP file
+2. Make sure you have [bower](http://bower.io/), [grunt-cli](https://www.npmjs.com/package/grunt-cli) and  [npm](https://www.npmjs.org/) installed globally
+3. On the command prompt run the following commands
+- cd `project-directory`
+- `npm install` - bower install is ran from the postinstall
+- `npm start` - a shortcut for `grunt serve`
+- `npm run dist` - a shortcut for `grunt serve:dist` to minify the files for deployment
 
-  * Copy the file javaee7-angular-3.2.war from target directory to your Wildfly installation folder /standalone/deployments
+## Roadmap
 
-  * Start Wildfly 8 and go to http://localhost:8080/javaee7-angular-3.2/
+- Add sample AJAX calls and make the directives more modular
 
-* ## Deploy in the Glassfish 4.1 ##
+### Automation tools
 
-  * Open Admin Console (http://localhost:8484/)
-  
-  * Go to menu "Application" 
-  
-  * In the button "Deploy..." select the file javaee7-angular-3.2.war
-   
-  * Go to http://localhost:8080/javaee7-angular-3.2/
-
-## Javascript Package Management (optional) ##
-
-* The required JS libraries are included in the project, but it also possible to manage them with the next steps.
-
-* You need NPM. Please go to http://nodejs.org/download/ to get a copy.
-
-* Once NPM is installed run the command `npm install`.
-
-* Install Grunt `npm install -g grunt-cli`  for more information please go to http://gruntjs.com/getting-started.
-
-* Run the command 'grunt' to download all the web dependencies and build an optimized version of the project.
+- [Grunt](http://gruntjs.com/)

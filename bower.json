@@ -1,18 +1,31 @@
 {
-    "name": "javaee7-angular",
-    "version": "1.0.0",
-    "authors": [
-        "Roberto Cortez <radcortez@yahoo.com>",
-        "Paulo Grácio <paulo.gracio@gmail.com>"
-    ],
-    "description": "javaee7-angular JavaScript dependencies.",
-    "private": true,
-    "dependencies": {
-        "angular": "~1.2.20",
-        "angular-resource": "~1.2.20",
-        "jquery": "~1.9.1",
-        "angular-bootstrap": "~0.11.0",
-        "bootstrap-css-only": "3.2.0",
-        "angular-grid": "~2.0.11"
-    }
+  "name": "sb-admin",
+  "version": "0.0.0",
+  "dependencies": {
+    "angular": "1.2.16",
+    "json3": "~3.3.1",
+    "es5-shim": "~3.1.0",
+    "angular-resource": "1.2.16",
+    "angular-cookies": "1.2.16",
+    "angular-sanitize": "1.2.16",
+    "angular-animate": "1.2.16",
+    "angular-touch": "1.2.16",
+    "angular-route": "1.2.16",
+    "font-awesome": "4.3.0",
+    "angular-bootstrap": "0.12.0",
+    "oclazyload": "~0.5.2",
+    "angular-loading-bar": "~0.7.0",
+    "angular-ui-router": "~0.2.13",
+    "angular-toggle-switch": "~1.2.1",
+    "metisMenu": "~1.1.3",
+    "angular-chart.js": "~0.5.2"
+  },
+  "devDependencies": {
+    "angular-mocks": "1.2.16",
+    "angular-scenario": "1.2.16"
+  },
+  "resolutions":{
+      "bootstrap": "~3.1.1"
+    },
+  "appPath": "app"
 }
